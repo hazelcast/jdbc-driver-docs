@@ -2,7 +2,7 @@ site:
   title: Documentation
   url: 
   robots: disallow
-  start_page: 
+  start_page: index.adoc
   keys:
     docsearch_id: 'QK2EAH8GB0'
     docsearch_api: 'ef7bd9485eafbd75d6e8425949eda1f5'
