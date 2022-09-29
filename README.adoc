@@ -1,4 +1,4 @@
-= {replace with your project} Documentation
+= Hazelcast JDBC Driver Documentation
 // Settings:
 ifdef::env-github[]
 :warning-caption: :warning:
@@ -15,7 +15,7 @@ endif::[]
 
 image:https://img.shields.io/badge/Build-Staging-yellow[link="{url-staging}"]
 
-This repository contains the Antora components for the {replace with your project} documentation.
+This repository contains the Antora components for the Hazelcast JDBC Driver documentation.
 
 The documentation source files are marked up with AsciiDoc.
 
@@ -60,7 +60,7 @@ To automate some elements of the build process, this repository includes the fol
 
 |validate-site.yml
 |Validates that all internal and external links are working
-|On a pull request to the `main`, `archive`, and `v/` maintenance branches
+|On a pull request to the `main` and `v/` maintenance branches
 
 |build-site.yml
 |Builds the production documentation site by sending a build hook to Netlify (the hosting platform that we use)
