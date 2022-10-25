@@ -1,0 +1,30 @@
+= Hazelcast JDBC Driver
+:url-github-jdbc: https://github.com/hazelcast/hazelcast-jdbc
+:description: Java Database Connectivity (JDBC) is the Java API standard for managing connections to databases, executing queries on them, and retrieving results. Hazelcast's JDBC driver allows you to connect to and execute SQL queries on Hazelcast clusters using application frameworks, libraries, and tools that support JDBC. 
+
+{description}
+
+You can use the Hazelcast JDBC driver with both local Hazelcast clusters and remote clusters deployed on public cloud platforms.
+
+NOTE: Currently, the Hazelcast JDBC driver does not support connections to Hazelcast {hazelcast-cloud}. Support is planned for upcoming releases.
+
+== Example Use Cases
+
+Integrate JDBC-compliant application frameworks, libraries, and tools to develop, manage, and monitor your Hazelcast solution.
+
+- **Development:** Work with your preferred Java-based framework, such as Spring Boot, to develop and deploy services to Hazelcast clusters without using a client.
+- **Data Management:** Load and browse cluster data, issue SQL commands, and store cluster connections from a single interface using a data management tool, such as DBeaver or SQuirrel SQL.
+- **Monitoring:** Connect to and visualize cluster data from an analytics tool, such as Tableau, for ongoing data monitoring and insights.
+
+If you need to connect to a JDBC-compliant database as a source or sink, consider using xref:hazelcast:integrate:jdbc-connector.adoc[Hazelcast's JDBC connector] instead.
+
+== Using the Hazelcast JDBC Driver
+
+The Hazelcast JDBC driver is available for download from a link:{url-github-jdbc}[GitHub repo] as a JAR file or using Maven. from a link:{url-github-jdbc}[GitHub repo or using Maven]. The JDBC driver is released independently from other Hazelcast products. 
+
+== Next Steps
+
+To install and configure the Hazelcast JDBC driver for your use case, see the following topics:
+
+- XXXXXXX
+- XXXXXXX
