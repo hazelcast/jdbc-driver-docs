@@ -99,7 +99,7 @@ Optional properties for local or remote Hazelcast clusters.
 
 |`smartRouting`
 |`boolean`
-|If set to `false`, the client application acts as a xref:hazelcast:java:java.adoc#java-client-operation-modes[unisocket] client with a connection to a single cluster member. This is useful if there are many clients, and you want to avoid each of them connecting to each member. The default value is `true`.
+|If set to `false`, the client application acts as a xref:hazelcast:clients:java.adoc#java-client-operation-modes[unisocket] client with a connection to a single cluster member. This is useful if there are many clients, and you want to avoid each of them connecting to each member. The default value is `true`.
 
 |`resubmissionMode`
 |`string`
