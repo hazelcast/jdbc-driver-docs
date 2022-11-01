@@ -1,2 +1,3 @@
 * xref:overview.adoc[What is Hazelcast JDBC Driver?]
 * xref:get-started.adoc[Get Started]
+* xref:configuration.adoc[Configuration]

@@ -27,4 +27,4 @@ The Hazelcast JDBC driver is available for download from a link:{url-github-jdbc
 To install and configure the Hazelcast JDBC driver for your use case, see the following topics:
 
 - XXXXXXX
-- XXXXXXX
+- xref:configuration.adoc[]

@@ -1,0 +1,326 @@
+= Configuring the JDBC Driver
+:url-dbeaver-jdbc: https://dbeaver.com/docs/wiki/Database-drivers/
+:description: To start using the Hazelcast JDBC driver, you need to load the JDBC driver and establish a connection to your Hazelcast cluster. To do this, some configuration is required.
+
+{description}
+
+You'll need to add the following details to your client application or tool:
+
+- <<jdbc-driver-class-name, JDBC driver class name>> 
+- <<connection-url, Connection string or URL>>
+
+NOTE: It is also possible to use xref:hazelcast:configuration:configuring-declaratively.adoc[configuration files] to set or xref:hazelcast:configuration:configuring-declaratively.adoc#overriding-configuration-with-system-properties-and-environment-variables[override the configuration] of your Java client application.
+
+[[jdbc-driver-class-name]]
+== Adding the JDBC Driver Class Name
+
+To load the JDBC driver, either add the class name `com.hazelcast.jdbc.Driver` to your client application or preferred tool.
+
+For a client application written in Spring Boot, you might add the following to your `application.properties`.
+
+[source,bash]
+----
+spring.datasource.driver-class-name=com.hazelcast.jdbc.Driver
+----
+
+Or, if you're using a tool like DBeaver, you'll add the class name to your link:{url-dbeaver-jdbac}[driver configuration].
+
+[[connection-url]]
+== Building a Connection URL
+
+The JDBC connection URL for a Hazelcast cluster has the following format:
+
+[source,bash]
+----
+jdbc:hazelcast://host[:port][,host[:port]...]/[?property1=value1[&property2=value2]...]
+----
+
+- `jdbc:hazelcast://` (required): JDBC protocol and subprotocol used to create the connection to the Hazelcast cluster.
+- `host` (required): Address of the server or servers to connect to. Use an IP address for a remote cluster, or localhost or 127.0.0.1 for a local cluster. Separate multiple addresses with a comma.
+- `port` (optional): Port to connect to on the specified server. The default value is `5701`.
+- `property<n>` (optional): One or more connection properties specified in a key-value format.
+
+For example, to connect to a local Hazelcast cluster, the connection URL might look like this:
+
+[source,bash]
+----
+jdbc:hazelcast://127.0.0.1:5701/?clusterName=hello-world
+
+----
+
+=== Connection Properties
+
+You can set the following connection properties for the Hazelcast JDBC driver.
+
+[cols="1a,2a"]
+|===
+|Property Type|Description
+
+|<<common-prop, Common Properties>>
+|Connection properties available for any local or remote Hazelcast cluster.
+
+|<<ssl-prop, SSL Properties>>
+|Secure connections using SSL/TLS.
+
+|<<gcp-prop, GCP Properties>>
+|For Hazelcast clusters deployed on Google Cloud Platform (GCP).
+
+|<<aws-prop, AWS Properties>>
+|For Hazelcast clusters deployed on Amazon Web Services (AWS).
+
+|<<azure-prop, Azure Properties>>
+|For Hazelcast clusters deployed on Microsoft Azure.
+
+|<<kube-prop, Kubernetes Properties>>
+|For Hazelcast clusters deployed on Kubernetes.
+
+|===
+
+[[common-prop]]
+==== *Common Properties*
+
+Optional properties for local or remote Hazelcast clusters.
+
+[cols="2a,2a,3a"]
+|===
+|Property|Value Type|Description
+
+|`user`
+|`string`
+|Username of the Hazelcast cluster. This property is only required if xref:hazelcast:security:simple-authentication.adoc[authentication] is enabled.
+
+|`password`
+|`string`
+|Password of the Hazelcast cluster. This property is only required if xref:hazelcast:security:simple-authentication.adoc[authentication] is enabled.
+
+|`clusterName`
+|`string`
+|Name of the cluster to connect to.
+
+|`smartRouting`
+|`boolean`
+|If set to `false`, the client application acts as a xref:hazelcast:java:java.adoc#java-client-operation-modes[unisocket] client with a connection to a single cluster member. This is useful if there are many clients, and you want to avoid each of them connecting to each member. The default value is `true`.
+
+|`resubmissionMode`
+|`string`
+|Strategy to retry failed queries. Valid values are:
+
+- `NEVER`
+- `RETRY_SELECTS`
+- `RETRY_SELECTS_ALLOW_DUPLICATES`
+- `RETRY_ALL`
+
+|===
+
+[[ssl-prop]]
+==== *SSL Properties*
+
+Properties for xref:hazelcast:security:tls-ssl.adoc[SSL/TLS connections] between the client application or tool and the Hazelcast cluster.
+
+[cols="2a,2a,3a"]
+|===
+|Property|Value Type|Description
+
+|`sslEnabled`
+|`boolean`
+|Enables or disables SSL/TLS for the client connection.
+
+|`trustStore` or `trustCertCollectionFile` 
+|`string`
+|Path to your truststore file. The truststore file is a keystore file that contains a collection of certificates trusted by your application.
+
+|`trustStorePassword` 
+|`string`
+|Password to unlock the truststore file.
+
+|`protocol` 
+|`string`
+|Name of the algorithm that is used for the TLS/SSL connection. The default value is `TLS`. Other available values are `TLSv1.2` and `TLSv1.3`.
+
+|`keyStore` 
+|`string`
+|Path to your keystore file.
+
+|`keyStorePassword` 
+|`string`
+|Password to access the key from your keystore file.
+
+|`keyCertChainFile` 
+|`string`
+|Path to an X.509 certificate chain file in PEM format.
+
+|`factoryClassName` 
+|`string`
+|Fully qualified class name that implements SSLContextFactory to provide a secure connection.
+
+|===
+
+[[gcp-prop]]
+==== *GCP Properties*
+
+Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-gcp.adoc[deployed on Google Cloud Platform (GCP)].
+
+[cols="2a,2a,3a"]
+|===
+|Property|Value Type|Description
+
+|`gcpPrivateKeyPath`
+|`string`
+|File system path to the private key file (JSON format) for the GCP service account. If not set, the access token is fetched from the GCP VM instance instead.
+
+|`gcpHzPort`
+|`string`
+|Range of ports where the GCP discovery plugin looks for Hazelcast members. If not set, the default value `5701-5708` is used.
+
+|`gcpProjects`
+|`string`
+|List of projects where the GCP discovery plugin looks for instances. If not set, the current project is used.
+
+|`gcpRegion`
+|`string`
+|Region where the GCP discovery plugin looks for Hazelcast instances. If not set, all zones of the current region are used.
+
+|`gcpLabel`
+|`string`
+|Filter that only looks for Hazelcast instances with the specified label. Use the format: `gcpLabel:key=value`.
+
+|`gcpUsePublicIp`
+|`boolean`
+|Whether to use the public IP address to reach the Hazelcast instance.
+
+|===
+
+[[aws-prop]]
+==== *AWS Properties*
+
+Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-aws.adoc[deployed on Amazon Web Services (AWS)].
+
+[cols="2a,2a,3a"]
+|===
+|Property|Value Type|Description
+
+|`awsAccessKey`
+|`string`
+|Access key of your AWS account. If not set, `iam-role` is used instead.
+
+|`awsSecretKey`
+|`string`
+|Secret key of your AWS account. If not set, `iam-role` is used instead.
+
+|`awsIamRole`
+|`string`
+|IAM role attached to the EC2 instance that you want to use to fetch credentials for authentication. If not set, the default IAM role attached to the EC2 instance is used instead.
+
+If neither `awsAccessKey` nor `awsSecretKey` is specified this property is used instead.
+
+|`awsTagKey` or `awsTagValue`
+|`string`
+|Filter that only looks for EC2 instances with the given `awsTagkey` or `awsTagValue` key-value pair. Multi-values are supported when separated by commas. For example: `keyA=value, keyB=value`. Comma-separated values are treated as AND conditions.
+
+|`awsRegion`
+|`string`
+|Region where Hazelcast members are running. The default is the current region.
+
+|`awsHostHeader`
+|`string`
+|Either `ec2`, `ecs`, or the URL of the EC2 or ECS API endpoint. By default, the URL is automatically detected.
+
+|`awsSecurityGroupName`
+|`string`
+|Filter that only looks for EC2 instances with the given security group.
+
+|`awsConnectionTimeoutSeconds`
+|`integer`
+|Connection timeout when a call is made to the AWS API. The default value is `10`.
+
+|`awsReadTimeoutSeconds`
+|`integer`
+|Read timeout when a call is made to the AWS API. The default value is `10`.
+
+|`awsConnectionRetries`
+|`integer`
+|Number of retries attempted when connecting to the AWS API. The default value is `3`. 
+
+|`awsHzPort`
+|`string`
+|Range of ports where the AWS discovery plugin looks for Hazelcast members. If not set, the default value `5701-5708` is used.
+
+|`awsUsePublicIp`
+|`boolean`
+|Whether to use the public IP address to reach the Hazelcast instance.
+
+|===
+
+[[azure-prop]]
+==== *Azure Properties*
+
+Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-azure.adoc[deployed on Microsoft Azure].
+
+[cols="2a,2a,3a"]
+|===
+|Property|Value Type|Description
+
+|`azureInstanceMetadataAvailable`
+|`boolean`
+|Set to `false` to use Azure connection properties. The default value is `true`.
+
+|`azureClientId`
+|`string`
+|Azure Active Directory Service Principal client ID for the hosted resources.
+
+|`azureClientSecret`
+|`string`
+|Azure Active Directory Service Principal client secret for the hosted resources.
+
+|`azureTenantId`
+|`string`
+|Azure Active Directory tenant ID for the hosted resources.
+
+|`azureSubscriptionId`
+|`string`
+|Your Azure subscription ID.
+
+|`azureResourceGroup`
+|`string`
+|Name of the Azure resource group where the Hazelcast instance is running.
+
+|`azureScaleSet`
+|`string`
+|Name of the Azure VM scale set, if configured. If set, the Azure discovery plugin only searches for Hazelcast instances in resources within the specified scale set.
+
+|`azureUsePublicIp`
+|`boolean`
+|Whether to use the public IP address to reach the Hazelcast instance.
+
+|===
+
+[[kube-prop]]
+==== *Kubernetes Properties*
+
+Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-in-kubernetes.adoc[deployed on Kubernetes].
+
+[cols="2a,2a,3a"]
+|===
+|Property|Value Type|Description
+
+|`k8sServiceDns`
+|`string`
+|Service DNS for your Kubernetes cluster, usually in the following format: `SERVICE-NAME.NAMESPACE.svc.cluster.local`.
+
+|`k8sServiceDnsTimeout`
+|`integer`
+|Custom timeout that limits how long the DNS lookup is checked.
+
+|`k8sNamespace`
+|`string`
+|Kubernetes namespace where Hazelcast is running.
+
+|`k8sServiceName`
+|`string`
+|Service name used to find and scan only the Pods connected to the specified service. If not set, all Pods are scanned.
+
+|`k8sServicePort`
+|`string`
+|Endpoint port for the Kubernetes service. The default is `0`. The default is overridden if the specified value is great than `0`.
+
+|===
