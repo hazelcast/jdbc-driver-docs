@@ -15,6 +15,9 @@ content:
   - url: https://github.com/hazelcast/imdg-docs
     branches: [main]
     start_path: docs
+  - url: https://github.com/hazelcast/management-center-docs
+    branches: [main]
+    start_path: docs
   - url: https://github.com/hazelcast/cloud-docs
     branches: [main]
     start_paths: [docs, tutorials]
