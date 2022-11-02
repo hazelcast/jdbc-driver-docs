@@ -16,17 +16,19 @@ NOTE: It is also possible to use xref:hazelcast:configuration:configuring-declar
 
 To load the JDBC driver, either add the class name `com.hazelcast.jdbc.Driver` to your client application or preferred tool.
 
-For a client application written in Spring Boot, you might add the following to your `application.properties`.
+For example, for a client application written in Spring Boot, you can add the following to your `application.properties` file.
 
 [source,bash]
 ----
 spring.datasource.driver-class-name=com.hazelcast.jdbc.Driver
 ----
 
-Or, if you're using a tool like DBeaver, you'll add the class name to your link:{url-dbeaver-jdbac}[driver configuration].
+Or, if you're using a tool like DBeaver, you can add the class name to your link:{url-dbeaver-jdbac}[driver configuration].
 
 [[connection-url]]
 == Building a Connection URL
+
+Next, you need to build and add a connection URL to your client application or preferred tool so that the JDBC driver has the correct details to connect to your Hazelcast cluster.   
 
 The JDBC connection URL for a Hazelcast cluster has the following format:
 
@@ -38,7 +40,7 @@ jdbc:hazelcast://host[:port][,host[:port]...]/[?property1=value1[&property2=valu
 - `jdbc:hazelcast://` (required): JDBC protocol and subprotocol used to create the connection to the Hazelcast cluster.
 - `host` (required): Address of the server or servers to connect to. Use an IP address for a remote cluster, or localhost or 127.0.0.1 for a local cluster. Separate multiple addresses with a comma.
 - `port` (optional): Port to connect to on the specified server. The default value is `5701`.
-- `property<n>` (optional): One or more connection properties specified in a key-value format.
+- `property<n>` (optional): One or more <<connection-prop,connection properties>> specified in a key-value format.
 
 For example, to connect to a local Hazelcast cluster, the connection URL might look like this:
 
@@ -48,7 +50,17 @@ jdbc:hazelcast://127.0.0.1:5701/?clusterName=hello-world
 
 ----
 
-=== Connection Properties
+For a client application written in Spring Boot, you can add the connection URL to your `application.properties` file.
+
+[source,bash]
+----
+spring.datasource.url=jdbc:hazelcast:/127.0.0.1:5701/?clusterName=hello-world
+----
+
+Or, if you're using a tool like DBeaver, you can add the connection URL to your database connection settings.
+
+[[connection-prop]]
+== Connection Properties
 
 You can set the following connection properties for the Hazelcast JDBC driver.
 
@@ -77,7 +89,7 @@ You can set the following connection properties for the Hazelcast JDBC driver.
 |===
 
 [[common-prop]]
-==== *Common Properties*
+=== Common Properties
 
 Optional properties for local or remote Hazelcast clusters.
 
@@ -113,7 +125,7 @@ Optional properties for local or remote Hazelcast clusters.
 |===
 
 [[ssl-prop]]
-==== *SSL Properties*
+=== SSL Properties
 
 Properties for xref:hazelcast:security:tls-ssl.adoc[SSL/TLS connections] between the client application or tool and the Hazelcast cluster.
 
@@ -156,7 +168,7 @@ Properties for xref:hazelcast:security:tls-ssl.adoc[SSL/TLS connections] between
 |===
 
 [[gcp-prop]]
-==== *GCP Properties*
+=== GCP Properties
 
 Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-gcp.adoc[deployed on Google Cloud Platform (GCP)].
 
@@ -191,7 +203,7 @@ Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-
 |===
 
 [[aws-prop]]
-==== *AWS Properties*
+=== AWS Properties
 
 Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-aws.adoc[deployed on Amazon Web Services (AWS)].
 
@@ -252,7 +264,7 @@ If neither `awsAccessKey` nor `awsSecretKey` is specified this property is used 
 |===
 
 [[azure-prop]]
-==== *Azure Properties*
+=== Azure Properties
 
 Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-azure.adoc[deployed on Microsoft Azure].
 
@@ -295,7 +307,7 @@ Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-on-
 |===
 
 [[kube-prop]]
-==== *Kubernetes Properties*
+=== Kubernetes Properties
 
 Connection properties for Hazelcast clusters xref:hazelcast:deploy:deploying-in-kubernetes.adoc[deployed on Kubernetes].
 
