@@ -1,2 +1,192 @@
 = Get Started with Hazelcast JDBC Driver
-Placeholder
+:url-dbeaver-jdbc: https://dbeaver.com/docs/wiki/Database-drivers/
+:description: This guide explains how to set up and configure the JDBC driver to connect to a local Hazelcast cluster using any JDBC-compliant application framework, library, or tool. It also shows you a simple way to test your connection.
+
+{description}
+
+This guide does not attempt to provide step-by-step instructions for the configuration of individual products but does include some examples for integrating the JDBC driver with Spring Boot and DBeaver.
+
+== Before You Begin
+
+To follow this guide, you need the following:
+
+[cols="1a,1a"]
+|===
+|Prerequisites|Useful resources
+
+|A Hazelcast cluster in client/server mode running on your local network.
+|xref:getting-started:get-started-binary.adoc[Start a Local Cluster].
+|===
+
+== Step 1. Install the JDBC Driver
+
+To get started, do one of the following:
+
+- Download the JDBC driver manually. Either copy the `hazelcast-jdbc.jar` to the correct directory on your local machine (as described in the documentation for the tool you want to integrate). Or, if you intend to use a programming interface, such as Spring Boot, set your classpath to the directory where you put the JAR file.
+- Download the JDBC driver using Maven. Simply add the `hazelcast-jdbc` dependency to the `pom.xml` of the application framework that you want to integrate.
+
++
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-jdbc</artifactId>
+    <version>{full-version}</version>
+</dependency>
+----
+
+Whichever installation method you choose, the `com.hazelcast.jdbc.Driver` class is automatically registered so you don't need to do this.
+
+== Step 2. Loading the JDBC Driver
+
+Next, you need to load the JDBC driver by adding the JDBC driver class name `com.hazelcast.jdbc.Driver` to your client application or preferred tool.
+
+For example, for a client application written in Spring Boot, you can add the following to your `application.properties` file.
+
+[source,bash]
+----
+spring.datasource.driver-class-name=com.hazelcast.jdbc.Driver
+----
+
+Or, if you're using a tool like DBeaver, add the class name to your link:{url-dbeaver-jdbc}[driver configuration].
+
+== Step 3. Connecting to the Cluster
+
+When the JDBC driver is loaded, the connection URL gives the driver a way to identify and connect to your Hazelcast cluster. 
+
+Add the following connection URL to your client application or preferred tool.
+
+[source,bash]
+----
+jdbc:hazelcast://localhost:5701/?clusterName=hello-world
+----
+
+For a client application written in Sprint Boot, you can add the connection URL to your `application.properties` file.
+
+[source,bash]
+----
+spring.datasource.url=jdbc:hazelcast:/localhost:5701/?clusterName=hello-world
+----
+
+If you're using DBeaver, add the connection URL to your database connection settings.
+
+NOTE: Other xref:configuration.adoc#connection-prop[connection properties] are also available.
+
+== Step 4. Testing Your Connection
+
+In this step, you'll start your application and test the connection to your Hazelcast cluster by querying some test data on it. Begin by writing some test data to your cluster.
+
+. Start your local Hazelcast cluster.
++
+[tabs] 
+==== 
+Mac:: 
++ 
+--
+[source,shell]
+----
+bin/hz-start
+----
+--
+Linux:: 
++ 
+--
+[source,shell]
+----
+bin/hz-start
+----
+--
+Windows:: 
++
+--
+[source,shell]
+----
+bin/hz-start.bat
+----
+--
+====
+
+. Start Management Center for your cluster.
++
+[tabs] 
+==== 
+Mac:: 
++ 
+--
+[source,shell]
+----
+management-center/bin/start.sh
+----
+--
+Linux:: 
++ 
+--
+[source,shell]
+----
+management-center/bin/start.sh
+----
+--
+Windows:: 
++
+--
+[source,shell]
+----
+management-center/bin/start.bat
+----
+--
+====
+
+. In a web browser, go to localhost:8080. 
++
+Your cluster details are displayed.
+
+. Click *View Cluster* and then select *SQL Browser* from the top navigation.
+
+. Execute the following SQL to create a table on the cluster for some test data.
++
+[source,sql]
+----
+CREATE OR REPLACE MAPPING people (
+__key INT, 
+age INT, 
+name VARCHAR)
+TYPE IMap
+OPTIONS('keyFormat'='int', 'valueFormat'='json-flat');
+----
+. Execute the following SQL to insert some test data.
++
+[source,sql]
+----
+INSERT INTO people VALUES
+(1, 23,'John'),
+(2, 35, 'Mary'),
+(3, 15, 'Amber'),
+(4, 68, 'Matthew'),
+(5, 45, 'Carol'),
+(6, 45, 'Carolyn');
+----
+
+Now you're ready to start up and test your preferred tool or framework. The following example shows how to test a connection to a Hazelcast cluster and query the data on it using DBeaver.
+
+. Select the database connection to your Hazelcast cluster and click **Edit**.
++
+image::ROOT:dbconnection.png[DBeaver database connection]
+
+. Click **Test Connection**.
++
+DBeaver displays a message to confirm your connnection to the cluster.
+
+. To make sure that you can access data on the cluster, select **SQL Editor** > **Open SQL Console** and execute the following query.
++
+[source,sql]
+----
+SELECT * FROM people;
+----
+DBeaver returns all entries that you added to the `people` map.
+
+== Next Steps
+
+To learn more about configuring the JDBC driver for your Hazelcast environment and use case, see the following topics:
+
+- XXXXXXX
+- xref:configuration.adoc[]

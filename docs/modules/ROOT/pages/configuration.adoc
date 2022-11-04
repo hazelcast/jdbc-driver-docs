@@ -23,7 +23,7 @@ For example, for a client application written in Spring Boot, you can add the fo
 spring.datasource.driver-class-name=com.hazelcast.jdbc.Driver
 ----
 
-Or, if you're using a tool like DBeaver, you can add the class name to your link:{url-dbeaver-jdbac}[driver configuration].
+Or, if you're using a tool like DBeaver, you can add the class name to your link:{url-dbeaver-jdbc}[driver configuration].
 
 [[connection-url]]
 == Building a Connection URL
@@ -46,18 +46,17 @@ For example, to connect to a local Hazelcast cluster, the connection URL might l
 
 [source,bash]
 ----
-jdbc:hazelcast://127.0.0.1:5701/?clusterName=hello-world
-
+jdbc:hazelcast://localhost:5701/?clusterName=hello-world
 ----
 
 For a client application written in Spring Boot, you can add the connection URL to your `application.properties` file.
 
 [source,bash]
 ----
-spring.datasource.url=jdbc:hazelcast:/127.0.0.1:5701/?clusterName=hello-world
+spring.datasource.url=jdbc:hazelcast:/localhost:5701/?clusterName=hello-world
 ----
 
-Or, if you're using a tool like DBeaver, you can add the connection URL to your database connection settings.
+Or, if you're using a tool like DBeaver, add the connection URL to your database connection settings.
 
 [[connection-prop]]
 == Connection Properties
