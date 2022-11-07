@@ -1,1 +1,4 @@
-* xref:index.adoc[]
+
+* xref:install.adoc[]
+* xref:upgrade.adoc[]
+* xref:security.adoc[]

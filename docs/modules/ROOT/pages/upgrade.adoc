@@ -1,0 +1,5 @@
+= Upgrading the Hazelcast JDBC Driver
+
+To upgrade to the latest version, reinstall the Hazelcast JDBC Driver after each new release.
+
+See xref:install.adoc[Installing the Hazelcast JDBC Driver] to see the installation options.
