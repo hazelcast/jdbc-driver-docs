@@ -188,5 +188,5 @@ DBeaver returns all entries that you added to the `people` map.
 
 To learn more about configuring the JDBC driver for your Hazelcast environment and use case, see the following topics:
 
-- XXXXXXX
 - xref:configuration.adoc[]
+- xref:security.adoc[]
