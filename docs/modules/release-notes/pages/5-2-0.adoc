@@ -1,0 +1,13 @@
+= 5.2.0 Release Notes
+
+== New Features
+
+* Added support of resubmitting queries after member failures.
+https://github.com/hazelcast/hazelcast-jdbc/pull/185[#185]
+* Added support of basic database metadata.
+https://github.com/hazelcast/hazelcast-jdbc/pull/170[#170]
+
+== Fixes
+
+* Fixed an issue where queries resulted in nulls for some fields.
+https://github.com/hazelcast/hazelcast-jdbc/pull/184[#184]
