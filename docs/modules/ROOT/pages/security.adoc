@@ -1,0 +1,6 @@
+= Securing the Connection
+
+You can use TLS/SSL to secure the communication between the JDBC driver and the cluster.
+TLS/SSL must be enabled and configured both on the driver and cluster sides.
+
+See xref:configuration.adoc#ssl-prop[TLS/SSL Properties] for the descriptions of the JDBC driver configuration elements, and xref:hazelcast:security:tls-ssl.adoc[TLS/SSL for Members] to configure the cluster side.

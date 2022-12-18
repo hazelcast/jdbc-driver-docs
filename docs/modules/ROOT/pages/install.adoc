@@ -1,0 +1,66 @@
+= Installing the Hazelcast JDBC Driver
+
+You can install the Hazelcast JDBC driver using one of the following:
+
+* Downloading the binary
+* Maven
+
+== Binary
+
+You can download the driver's JAR file manually from the https://github.com/hazelcast/hazelcast-jdbc/releases[releases page] to be used
+as a library in your projects.
+
+Once downloaded, you can either:
+
+* put the JAR file to the directory as required by the database administration tool and frameworks you use or,
+* set the classpath pointing to the directory containing the JAR file.
+
+Regardless of which option you use to download, the implementation class of the driver (`com.hazelcast.jdbc.Driver`) automatically registers itself.
+
+== Maven
+
+You can download the Hazelcast JDBC driver using Maven by adding the following to the `pom.xml` of your project.
+
+[tabs] 
+==== 
+Stable Versions:: 
++ 
+-- 
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-jdbc</artifactId>
+    <version>{full-version}/version>
+</dependency>
+----
+--
+
+Snapshot Versions::
++
+--
+
+You can always download the latest development build by adding the snapshot repository:
+
+[source,xml]
+----
+<repository>
+    <id>snapshot-repository</id>
+    <name>Maven2 Snapshot Repository</name>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+</repository>
+----
+
+And the dependency:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.hazelcast</groupId>
+    <artifactId>hazelcast-jdbc</artifactId>
+    <version>5.3-SNAPSHOT</version>
+</dependency>
+----
+--
+====
+
