@@ -142,7 +142,7 @@ Your cluster details are displayed.
 
 . Click *View Cluster* and then select *SQL Browser* from the top navigation.
 
-. Execute the following SQL to create a table on the cluster for some test data.
+. Execute the following SQL to create a mapping to an IMap on the cluster for some test data.
 +
 [source,sql]
 ----
