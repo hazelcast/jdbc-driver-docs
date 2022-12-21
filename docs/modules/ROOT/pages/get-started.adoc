@@ -15,7 +15,7 @@ To follow this guide, you need the following:
 |Prerequisites|Useful resources
 
 |A Hazelcast cluster in client/server mode running on your local network.
-|xref:getting-started:get-started-binary.adoc[Start a Local Cluster].
+|xref:hazelcast:getting-started:get-started-binary.adoc[Start a Local Cluster].
 |===
 
 == Step 1. Install the JDBC Driver
