@@ -1,0 +1,7 @@
+= Upgrading the Hazelcast JDBC Driver
+
+To upgrade to the latest version, reinstall the Hazelcast JDBC Driver after each new release.
+
+For a Maven project, see xref:install.adoc#maven[how to install using Maven].
+
+If you are using the driver for some UI tools to connect to a database such as Tableau or DBeaver, see xref:install.adoc#binary[how to install by downloading the JAR file manually].
