@@ -1,9 +1,12 @@
+. Get Started
 * xref:overview.adoc[What is Hazelcast JDBC Driver?]
 * xref:get-started.adoc[Get Started]
-* xref:configuration.adoc[Configuration]
-* xref:install.adoc[]
-* xref:upgrade.adoc[]
-* xref:security.adoc[]
+
+. Manage
+* xref:install.adoc[Install]
+* xref:configuration.adoc[Configure]
+* xref:upgrade.adoc[Upgrade]
+* xref:security.adoc[Security]
 
 . Release Notes
 * xref:release-notes:releases.adoc[Releases]
