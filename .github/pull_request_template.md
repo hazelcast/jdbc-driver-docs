@@ -10,4 +10,4 @@ Select the type of change that you're making:
 - [ ] Enhancement (Adds new content)
 
 ## Open Questions and Pre-Merge TODOs
-- [ ] Use github checklists to create a list. When an item is solved, check the box and explain the answer.
+- [ ] Use GitHub checklists to create a list. When an item is solved, check the box and explain the answer.

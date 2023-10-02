@@ -2,7 +2,7 @@
 
 == New Features
 
-* Added support of resubmitting queries after member failures.
+* Added support for resubmitting queries after member failures.
 https://github.com/hazelcast/hazelcast-jdbc/pull/185[#185]
 * Added support of basic database metadata.
 https://github.com/hazelcast/hazelcast-jdbc/pull/170[#170]
