@@ -1,4 +1,4 @@
-= Hazelcast JDBC Driver Documentation
+= Hazelcast JDBC Driver Documentation [archived]
 // Settings:
 ifdef::env-github[]
 :warning-caption: :warning:
@@ -8,12 +8,12 @@ endif::[]
 :url-contribute: https://github.com/hazelcast/hazelcast-docs/blob/develop/.github/CONTRIBUTING.adoc
 :url-ui: {url-org}/hazelcast-docs-ui
 :url-playbook: {url-org}/hazelcast-docs
-:url-staging: 
+:url-staging:
 :url-cc: https://creativecommons.org/licenses/by-nc-sa/3.0/
 :url-hz-docs: {url-org}/hz-docs
 :url-mc-docs: {url-org}/management-center-docs
 
-image:https://img.shields.io/badge/Build-Staging-yellow[link="{url-staging}"]
+> This repository is no longer being maintained. The content has been migrated to the new link:https://github.com/hazelcast/documentation[Hazelcast documentation] repository. Find the published documentation at link:https://docs.hazelcast.com[docs.hazelcast.com].
 
 This repository contains the Antora components for the Hazelcast JDBC Driver documentation.
 
